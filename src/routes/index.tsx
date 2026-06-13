@@ -1,29 +1,57 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Toaster } from "sonner";
+
+import { Header } from "@/components/site/Header";
+import { Hero } from "@/components/site/Hero";
+import { About } from "@/components/site/About";
+import { Services } from "@/components/site/Services";
+import { Masters } from "@/components/site/Masters";
+import { Reviews } from "@/components/site/Reviews";
+import { Booking } from "@/components/site/Booking";
+import { Contacts } from "@/components/site/Contacts";
+import { Footer } from "@/components/site/Footer";
+import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
+import { ScrollProgress } from "@/components/site/ScrollProgress";
+import { CookieBanner } from "@/components/site/CookieBanner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Серин — салон красоты в мкр. Губернский, Чехов | Запись онлайн" },
+      {
+        name: "description",
+        content:
+          "Салон красоты «Серин» в Чехове: окрашивание, стрижки, маникюр, брови и ресницы. Рейтинг 4.8 ⭐, 212 отзывов. Запишитесь онлайн.",
+      },
+      { property: "og:title", content: "Серин — салон красоты в мкр. Губернский, Чехов" },
+      {
+        property: "og:description",
+        content: "Уют, профессионализм и индивидуальный подход. Запишитесь онлайн.",
+      },
+      { property: "og:url", content: "/" },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <ScrollProgress />
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Masters />
+        <Reviews />
+        <Booking />
+        <Contacts />
+      </main>
+      <Footer />
+      <FloatingWhatsApp />
+      <CookieBanner />
+      <Toaster position="top-center" richColors />
+    </>
   );
 }
