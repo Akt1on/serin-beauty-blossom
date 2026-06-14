@@ -7,5 +7,7 @@ export default defineNitroConfig({
   },
   vercel: {
     regions: ['all']
-  }
+  },
+  // Ensure public assets are copied
+  publicAssets: [{ dir: './public' }]
 })

@@ -13,4 +13,8 @@ export default defineConfig({
     server: { entry: "server" },
     nitro: true,
   },
+  // Force Nitro for Vercel
+  vite: {
+    plugins: []
+  }
 });
