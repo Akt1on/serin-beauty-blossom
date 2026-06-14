@@ -105,10 +105,6 @@
   }
 }
 
-@utility text-balance {
-  text-wrap: balance;
-}
-
 /* Subtle film-grain overlay for luxury feel */
 @utility grain {
   position: relative;
