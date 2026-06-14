@@ -70,7 +70,7 @@ export function Booking() {
     <section
       id="booking"
       className="px-4 py-24 sm:px-6 lg:px-8"
-      style={{ background: "linear-gradient(135deg, #F5E6E8 0%, #FDF6F0 100%)" }}
+      style={{ background: "linear-gradient(135deg, #F0E4D6 0%, #FAF6F0 100%)" }}
     >
       <div className="mx-auto max-w-2xl">
         <Reveal className="text-center">
