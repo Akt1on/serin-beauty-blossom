@@ -3,5 +3,7 @@
   "framework": "tanstack-start",
   "buildCommand": "bun run build",
   "outputDirectory": ".vercel/output",
-  "installCommand": "bun install"
+  "installCommand": "bun install",
+  "cleanUrls": true,
+  "trailingSlash": false
 }
