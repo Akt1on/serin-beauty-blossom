@@ -12,7 +12,8 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
 
-  --font-display: "Cormorant Garamond", serif;
+  --font-display: "Italiana", "Cormorant Garamond", serif;
+  --font-serif: "Cormorant Garamond", serif;
   --font-sans: "Inter", sans-serif;
 
   --color-background: var(--background);
@@ -40,39 +41,43 @@
   --color-cream: var(--cream);
   --color-mocha: var(--mocha);
   --color-gold: var(--gold);
+  --color-champagne: var(--champagne);
 
-  --shadow-soft: 0 10px 40px -10px rgba(212, 165, 165, 0.25);
-  --shadow-rose: 0 8px 30px -8px rgba(212, 165, 165, 0.4);
+  --shadow-soft: 0 20px 60px -25px rgba(43, 24, 16, 0.18);
+  --shadow-rose: 0 14px 40px -12px rgba(201, 169, 110, 0.45);
+  --shadow-luxe: 0 30px 80px -30px rgba(43, 24, 16, 0.28);
 }
 
 :root {
   --radius: 1rem;
 
-  --rose: #d4a5a5;
-  --rose-soft: #f5e6e8;
-  --cream: #fdf6f0;
-  --mocha: #3d2b1f;
-  --gold: #c9a96e;
+  /* Dior-inspired: cream, champagne, gold, espresso */
+  --cream: #faf6f0;
+  --champagne: #e8d5c4;
+  --rose: #b8956a;       /* warm gold-bronze (semantic accent) */
+  --rose-soft: #f0e4d6;  /* soft champagne tint */
+  --mocha: #2b1810;      /* deep espresso */
+  --gold: #c9a96e;       /* polished gold */
 
-  --background: #ffffff;
-  --foreground: #3d2b1f;
+  --background: #faf6f0;
+  --foreground: #2b1810;
   --card: #ffffff;
-  --card-foreground: #3d2b1f;
+  --card-foreground: #2b1810;
   --popover: #ffffff;
-  --popover-foreground: #3d2b1f;
-  --primary: #d4a5a5;
-  --primary-foreground: #ffffff;
-  --secondary: #fdf6f0;
-  --secondary-foreground: #3d2b1f;
-  --muted: #fdf6f0;
-  --muted-foreground: #8a7060;
-  --accent: #f5e6e8;
-  --accent-foreground: #3d2b1f;
+  --popover-foreground: #2b1810;
+  --primary: #2b1810;
+  --primary-foreground: #faf6f0;
+  --secondary: #f0e4d6;
+  --secondary-foreground: #2b1810;
+  --muted: #faf6f0;
+  --muted-foreground: #6b5544;
+  --accent: #e8d5c4;
+  --accent-foreground: #2b1810;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
-  --border: #f0e3df;
-  --input: #f0e3df;
-  --ring: #d4a5a5;
+  --border: #ece1d2;
+  --input: #ece1d2;
+  --ring: #c9a96e;
 }
 
 @layer base {
@@ -87,10 +92,35 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    letter-spacing: -0.015em;
   }
+  ::selection {
+    background: var(--gold);
+    color: var(--cream);
+  }
+}
+
+/* Subtle film-grain overlay for luxury feel */
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+}
+
+/* Refined hairline divider with gold accent */
+@utility hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
 }
