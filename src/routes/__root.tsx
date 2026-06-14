@@ -103,13 +103,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Салон красоты «Серин» в Чехове, мкр. Губернский: окрашивание, стрижки, маникюр, брови и ресницы. Рейтинг 4.8 ⭐, 212 отзывов.",
       },
-      { property: "og:title", content: "Серин — салон красоты в Чехове" },
+      { property: "og:title", content: "Серин — салон красоты в мкр. Губернский, Чехов" },
       {
         property: "og:description",
         content: "Уют, профессионализм и индивидуальный подход. Запись онлайн.",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Серин" },
+      { name: "twitter:title", content: "Серин — салон красоты в мкр. Губернский, Чехов" },
+      { name: "description", content: "Веб-сайт для салона красоты \"Серин\" в Чехове, Московская область." },
+      { property: "og:description", content: "Веб-сайт для салона красоты \"Серин\" в Чехове, Московская область." },
+      { name: "twitter:description", content: "Веб-сайт для салона красоты \"Серин\" в Чехове, Московская область." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9aa0d16d-053e-4aae-ae51-14b34757253c/id-preview-7c4af958--ae2b4f1d-1397-43ba-9d45-55d74974dabb.lovable.app-1781424335982.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/9aa0d16d-053e-4aae-ae51-14b34757253c/id-preview-7c4af958--ae2b4f1d-1397-43ba-9d45-55d74974dabb.lovable.app-1781424335982.png" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
