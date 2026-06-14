@@ -23,12 +23,7 @@ for (let h = 9; h <= 21; h++) {
 
 function formatPhone(v: string) {
   const d = v.replace(/\D/g, "").replace(/^7/, "").slice(0, 10);
-  const parts = [
-    d.slice(0, 3),
-    d.slice(3, 6),
-    d.slice(6, 8),
-    d.slice(8, 10),
-  ];
+  const parts = [d.slice(0, 3), d.slice(3, 6), d.slice(6, 8), d.slice(8, 10)];
   let out = "+7";
   if (parts[0]) out += ` (${parts[0]}`;
   if (parts[0] && parts[0].length === 3) out += ")";
@@ -64,25 +59,35 @@ export function Booking() {
   };
 
   const fieldCls =
-    "w-full rounded-2xl border border-rose/20 bg-white px-4 py-3 text-sm text-mocha outline-none transition focus:border-rose focus:ring-2 focus:ring-rose/20";
+    "peer w-full rounded-2xl border border-mocha/15 bg-white/80 px-4 py-3.5 text-[14px] text-mocha outline-none transition-all placeholder:text-mocha/30 focus:border-gold focus:bg-white focus:ring-4 focus:ring-gold/15";
+  const labelCls = "mb-2 block text-[10px] font-medium uppercase tracking-[0.22em] text-mocha/55";
 
   return (
-    <section
-      id="booking"
-      className="px-4 py-24 sm:px-6 lg:px-8"
-      style={{ background: "linear-gradient(135deg, #F0E4D6 0%, #FAF6F0 100%)" }}
-    >
-      <div className="mx-auto max-w-2xl">
+    <section id="booking" className="relative overflow-hidden px-4 py-28 sm:px-6 lg:px-8">
+      <div className="absolute inset-0 mesh-bg" />
+      <div
+        className="pointer-events-none absolute -top-32 right-1/4 h-[400px] w-[400px] rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(circle, #C9A96E 0%, transparent 70%)" }}
+      />
+
+      <div className="relative mx-auto max-w-2xl">
         <Reveal className="text-center">
-          <h2 className="font-display text-4xl text-mocha sm:text-5xl">Запись онлайн</h2>
-          <p className="mt-4 text-mocha/60">Заполните форму — администратор подтвердит запись</p>
+          <div className="mb-5 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-gold">
+            <span className="h-px w-8 bg-gold/60" /> Запись <span className="h-px w-8 bg-gold/60" />
+          </div>
+          <h2 className="font-display text-[2.5rem] leading-[1.05] text-mocha sm:text-[3.5rem]">
+            Забронируйте <span className="font-serif italic text-mocha/70">визит</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-md text-[14px] text-mocha/60">
+            Оставьте заявку — администратор подтвердит запись в&nbsp;течение 15&nbsp;минут.
+          </p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="mt-12 rounded-3xl bg-white p-6 shadow-soft sm:p-10">
-            <div className="grid gap-4">
+          <div className="lux-card mt-12 overflow-hidden rounded-[2rem] p-7 sm:p-12">
+            <div className="grid gap-5">
               <div>
-                <label className="mb-2 block text-xs font-medium text-mocha/70">Имя *</label>
+                <label className={labelCls}>Имя *</label>
                 <input
                   className={fieldCls}
                   placeholder="Ваше имя"
@@ -91,7 +96,7 @@ export function Booking() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-medium text-mocha/70">Телефон *</label>
+                <label className={labelCls}>Телефон *</label>
                 <input
                   type="tel"
                   className={fieldCls}
@@ -101,7 +106,7 @@ export function Booking() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-xs font-medium text-mocha/70">Категория услуги *</label>
+                <label className={labelCls}>Категория услуги *</label>
                 <select
                   className={fieldCls}
                   value={form.category}
@@ -116,7 +121,7 @@ export function Booking() {
                 </select>
               </div>
               <div>
-                <label className="mb-2 block text-xs font-medium text-mocha/70">Мастер</label>
+                <label className={labelCls}>Мастер</label>
                 <select
                   className={fieldCls}
                   value={form.master}
@@ -129,9 +134,9 @@ export function Booking() {
                   ))}
                 </select>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-xs font-medium text-mocha/70">Дата *</label>
+                  <label className={labelCls}>Дата *</label>
                   <input
                     type="date"
                     min={today}
@@ -141,7 +146,7 @@ export function Booking() {
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-xs font-medium text-mocha/70">Время *</label>
+                  <label className={labelCls}>Время *</label>
                   <select
                     className={fieldCls}
                     value={form.time}
@@ -157,26 +162,29 @@ export function Booking() {
                 </div>
               </div>
 
-              <label className="mt-2 flex cursor-pointer items-start gap-3 text-xs text-mocha/70">
+              <label className="mt-2 flex cursor-pointer items-start gap-3 text-[12px] text-mocha/65">
                 <input
                   type="checkbox"
                   checked={form.consent}
                   onChange={(e) => update("consent", e.target.checked)}
-                  className="mt-0.5 h-4 w-4 shrink-0 accent-rose"
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-gold"
                 />
-                <span>Я согласен(а) на обработку персональных данных</span>
+                <span>Я согласен(а) на обработку персональных данных в соответствии с 152-ФЗ</span>
               </label>
 
-              <div
+              <button
                 onClick={submit}
-                className="mt-2 w-full cursor-pointer rounded-full bg-rose py-4 text-center text-sm font-medium text-white shadow-rose transition hover:opacity-90"
+                className="group relative mt-3 w-full cursor-pointer overflow-hidden rounded-full bg-mocha py-4 text-[12px] font-medium uppercase tracking-[0.22em] text-cream shadow-luxe transition-all hover:bg-gold"
               >
-                Записаться
-              </div>
+                <span className="relative z-10">Записаться</span>
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-cream/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              </button>
 
-              <p className="text-center text-[11px] leading-relaxed text-mocha/50">
-                Нажимая кнопку, вы соглашаетесь на обработку персональных данных в соответствии с{" "}
-                <a href="/privacy" className="underline">Политикой конфиденциальности</a> согласно 152-ФЗ.
+              <p className="text-center text-[11px] leading-relaxed text-mocha/45">
+                Нажимая кнопку, вы соглашаетесь с{" "}
+                <a href="/privacy" className="underline decoration-gold/40 underline-offset-2 hover:text-gold">
+                  Политикой конфиденциальности
+                </a>
               </p>
             </div>
           </div>
@@ -184,13 +192,15 @@ export function Booking() {
 
         <Reveal delay={0.2}>
           <div className="mt-10 text-center">
-            <p className="mb-4 text-sm text-mocha/70">Или напишите нам напрямую:</p>
+            <p className="mb-4 text-[11px] uppercase tracking-[0.25em] text-mocha/55">
+              Или напишите напрямую
+            </p>
             <div className="flex flex-wrap justify-center gap-3">
               <a
                 href="https://wa.me/message/EFOTX3YYWFEPE1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-[#25D366] px-6 py-3 text-sm font-medium text-white shadow-soft transition hover:opacity-90"
+                className="rounded-full bg-[#25D366] px-7 py-3.5 text-[12px] uppercase tracking-[0.2em] text-white shadow-soft transition hover:-translate-y-0.5"
               >
                 WhatsApp
               </a>
@@ -198,7 +208,7 @@ export function Booking() {
                 href="https://t.me/salonserin"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-[#229ED9] px-6 py-3 text-sm font-medium text-white shadow-soft transition hover:opacity-90"
+                className="rounded-full bg-[#229ED9] px-7 py-3.5 text-[12px] uppercase tracking-[0.2em] text-white shadow-soft transition hover:-translate-y-0.5"
               >
                 Telegram
               </a>

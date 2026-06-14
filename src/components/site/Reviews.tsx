@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Star, ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, Star, ExternalLink, Quote } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const RATINGS = [
@@ -41,89 +42,129 @@ export function Reviews() {
   const next = () => setIdx((idx + 1) % REVIEWS.length);
 
   return (
-    <section id="reviews" className="bg-cream px-4 py-24 sm:px-6 lg:px-8">
+    <section id="reviews" className="mesh-bg relative px-4 py-28 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <Reveal className="text-center">
-          <h2 className="font-display text-4xl text-mocha sm:text-5xl">Отзывы клиентов</h2>
+          <div className="mb-5 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-gold">
+            <span className="h-px w-8 bg-gold/60" /> Отзывы <span className="h-px w-8 bg-gold/60" />
+          </div>
+          <h2 className="font-display text-[2.5rem] leading-[1.05] text-mocha sm:text-[3.5rem]">
+            Что говорят <span className="font-serif italic text-mocha/70">клиенты</span>
+          </h2>
         </Reveal>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[auto_1fr] lg:items-center">
+        <div className="mt-16 grid gap-10 lg:grid-cols-[auto_1fr] lg:items-center">
           <Reveal>
-            <div className="rounded-3xl bg-white p-8 text-center shadow-soft lg:w-72">
-              <div className="font-display text-7xl text-mocha">4.8</div>
-              <div className="mt-2 flex justify-center gap-1">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} size={18} className="fill-gold text-gold" />
-                ))}
+            <div className="lux-card relative overflow-hidden rounded-[1.75rem] p-10 text-center lg:w-80">
+              <div
+                className="pointer-events-none absolute -top-16 left-1/2 h-44 w-44 -translate-x-1/2 rounded-full opacity-50 blur-3xl"
+                style={{ background: "radial-gradient(circle, #E8CF9A 0%, transparent 70%)" }}
+              />
+              <div className="relative">
+                <div className="font-display text-[5.5rem] leading-none text-gold-gradient">4.8</div>
+                <div className="mt-2 flex justify-center gap-1">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Star key={i} size={16} className="fill-gold text-gold" />
+                  ))}
+                </div>
+                <p className="mt-4 text-[11px] uppercase tracking-[0.25em] text-mocha/50">
+                  212 отзывов · Яндекс
+                </p>
               </div>
-              <p className="mt-3 text-sm text-mocha/60">212 отзывов</p>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="space-y-3">
-              {RATINGS.map((r) => (
-                <div key={r.label}>
-                  <div className="flex justify-between text-sm">
+            <div className="space-y-3.5">
+              {RATINGS.map((r, i) => (
+                <motion.div
+                  key={r.label}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.04 }}
+                >
+                  <div className="flex justify-between text-[13px]">
                     <span className="text-mocha">{r.label}</span>
-                    <span className="text-mocha/60">
+                    <span className="text-mocha/55">
                       {r.percent}% · {r.count}
                     </span>
                   </div>
-                  <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-white">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-rose to-gold"
-                      style={{ width: `${r.percent}%` }}
+                  <div className="mt-1.5 h-[6px] overflow-hidden rounded-full bg-mocha/8">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${r.percent}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.1, delay: 0.2 + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                      className="h-full rounded-full"
+                      style={{ background: "linear-gradient(90deg, #C9A96E, #E8CF9A)" }}
                     />
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </Reveal>
         </div>
 
         <Reveal delay={0.15}>
-          <div className="mt-14 rounded-3xl bg-white p-8 shadow-soft sm:p-12">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="min-w-0">
-                <h3 className="font-display text-2xl text-mocha">{review.name}</h3>
-                <p className="mt-1 text-xs text-mocha/50">
-                  {review.date} · {review.level}
+          <div className="lux-card relative mt-16 overflow-hidden rounded-[2rem] p-10 sm:p-14">
+            <Quote
+              size={80}
+              className="absolute -right-3 -top-3 text-gold/15"
+              strokeWidth={1}
+            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.4 }}
+              >
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="min-w-0">
+                    <h3 className="font-display text-2xl text-mocha">{review.name}</h3>
+                    <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-mocha/45">
+                      {review.date} · {review.level}
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 gap-1">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} size={14} className="fill-gold text-gold" />
+                    ))}
+                  </div>
+                </div>
+                <p className="mt-7 font-serif text-[1.2rem] leading-[1.65] italic text-mocha/80 sm:text-[1.35rem]">
+                  «{review.text}»
                 </p>
-              </div>
-              <div className="flex gap-1 shrink-0">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} size={16} className="fill-gold text-gold" />
-                ))}
-              </div>
-            </div>
-            <p className="mt-6 text-base leading-relaxed text-mocha/80">«{review.text}»</p>
+              </motion.div>
+            </AnimatePresence>
 
-            <div className="mt-8 flex items-center justify-between">
+            <div className="mt-10 flex items-center justify-between">
               <button
                 onClick={prev}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-cream text-mocha transition hover:bg-rose hover:text-white"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-mocha/15 text-mocha transition hover:border-gold hover:bg-gold hover:text-cream"
                 aria-label="Предыдущий"
               >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={18} />
               </button>
-              <div className="flex gap-1.5">
+              <div className="flex gap-2">
                 {REVIEWS.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setIdx(i)}
-                    className={`h-1.5 rounded-full transition-all ${
-                      i === idx ? "w-8 bg-rose" : "w-1.5 bg-rose/30"
+                    className={`h-1.5 rounded-full transition-all duration-500 ${
+                      i === idx ? "w-10 bg-gold" : "w-1.5 bg-mocha/20 hover:bg-mocha/40"
                     }`}
                   />
                 ))}
               </div>
               <button
                 onClick={next}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-cream text-mocha transition hover:bg-rose hover:text-white"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-mocha/15 text-mocha transition hover:border-gold hover:bg-gold hover:text-cream"
                 aria-label="Следующий"
               >
-                <ChevronRight size={20} />
+                <ChevronRight size={18} />
               </button>
             </div>
           </div>
@@ -135,10 +176,10 @@ export function Reviews() {
               href="https://yandex.ru/maps/org/serin/43329996973"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-mocha/20 bg-white px-6 py-3 text-sm font-medium text-mocha transition hover:bg-rose hover:text-white hover:border-rose"
+              className="inline-flex items-center gap-2 rounded-full border border-mocha/20 bg-white/60 px-7 py-3.5 text-[11px] uppercase tracking-[0.2em] text-mocha backdrop-blur transition hover:border-gold hover:text-gold"
             >
-              Читать все отзывы на Яндекс Картах
-              <ExternalLink size={14} />
+              Все отзывы на Яндекс Картах
+              <ExternalLink size={13} />
             </a>
           </div>
         </Reveal>
