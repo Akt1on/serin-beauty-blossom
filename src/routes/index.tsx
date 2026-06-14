@@ -13,6 +13,7 @@ import { Footer } from "@/components/site/Footer";
 import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { CookieBanner } from "@/components/site/CookieBanner";
+import { Marquee } from "@/components/site/Marquee";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,6 +42,7 @@ function Index() {
       <Header />
       <main>
         <Hero />
+        <Marquee />
         <About />
         <Services />
         <Masters />

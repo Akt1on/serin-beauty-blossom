@@ -7,10 +7,11 @@ export function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Написать в WhatsApp"
-      className="fixed right-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition hover:scale-110"
-      style={{ boxShadow: "0 10px 30px -5px rgba(37,211,102,0.5)" }}
+      className="group fixed right-5 bottom-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110"
+      style={{ boxShadow: "0 14px 36px -6px rgba(37,211,102,0.55)" }}
     >
-      <MessageCircle size={26} />
+      <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366] opacity-25" />
+      <MessageCircle size={24} />
     </a>
   );
 }
