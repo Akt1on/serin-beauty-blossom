@@ -5,8 +5,12 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { About } from "@/components/site/About";
 import { Services } from "@/components/site/Services";
+import { Promo } from "@/components/site/Promo";
+import { Gallery } from "@/components/site/Gallery";
+import { Calculator } from "@/components/site/Calculator";
 import { Masters } from "@/components/site/Masters";
 import { Reviews } from "@/components/site/Reviews";
+import { FAQ, FAQ_ITEMS } from "@/components/site/FAQ";
 import { Booking } from "@/components/site/Booking";
 import { Contacts } from "@/components/site/Contacts";
 import { Footer } from "@/components/site/Footer";
@@ -14,6 +18,17 @@ import { FloatingWhatsApp } from "@/components/site/FloatingWhatsApp";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { CookieBanner } from "@/components/site/CookieBanner";
 import { Marquee } from "@/components/site/Marquee";
+import { MobileCTA } from "@/components/site/MobileCTA";
+
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((i) => ({
+    "@type": "Question",
+    name: i.q,
+    acceptedAnswer: { "@type": "Answer", text: i.a },
+  })),
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,6 +49,12 @@ export const Route = createFileRoute("/")({
     links: [
       { rel: "canonical", href: "https://serin-beauty-blossom.lovable.app/" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(FAQ_JSON_LD),
+      },
+    ],
   }),
   component: Index,
 });
@@ -48,13 +69,18 @@ function Index() {
         <Marquee />
         <About />
         <Services />
+        <Promo />
+        <Gallery />
+        <Calculator />
         <Masters />
         <Reviews />
+        <FAQ />
         <Booking />
         <Contacts />
       </main>
       <Footer />
       <FloatingWhatsApp />
+      <MobileCTA />
       <CookieBanner />
       <Toaster position="top-center" richColors />
     </>

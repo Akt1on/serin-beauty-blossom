@@ -5,8 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const NAV = [
   { href: "#services", label: "Услуги" },
+  { href: "#gallery", label: "Работы" },
   { href: "#masters", label: "Мастера" },
   { href: "#reviews", label: "Отзывы" },
+  { href: "#faq", label: "Вопросы" },
   { href: "#contacts", label: "Контакты" },
 ];
 

@@ -1,0 +1,14 @@
+{
+  "name": "Серин — салон красоты в Чехове",
+  "short_name": "Серин",
+  "description": "Салон красоты «Серин» в мкр. Губернский, Чехов. Запись онлайн.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#faf6f0",
+  "theme_color": "#c9a96e",
+  "lang": "ru",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "any", "type": "image/x-icon" }
+  ]
+}
