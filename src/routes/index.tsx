@@ -22,14 +22,17 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Салон красоты «Серин» в Чехове: окрашивание, стрижки, маникюр, брови и ресницы. Рейтинг 4.8 ⭐, 212 отзывов. Запишитесь онлайн.",
+          "Салон красоты «Серин» в Чехове: окрашивание, стрижки, маникюр, брови и ресницы. Рейтинг 4.8 ⭐ (212 отзывов). Запишитесь онлайн за 30 секунд.",
       },
       { property: "og:title", content: "Серин — салон красоты в мкр. Губернский, Чехов" },
       {
         property: "og:description",
         content: "Уют, профессионализм и индивидуальный подход. Запишитесь онлайн.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://serin-beauty-blossom.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://serin-beauty-blossom.lovable.app/" },
     ],
   }),
   component: Index,
